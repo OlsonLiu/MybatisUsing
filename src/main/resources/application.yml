@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc
+    url: jdbc:mysql://127.0.0.1:3306/demo_db?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: zaq12wsx
+
+server:
+  port: 3306
