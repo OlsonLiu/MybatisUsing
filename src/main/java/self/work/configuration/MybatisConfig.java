@@ -37,7 +37,7 @@ public class MybatisConfig {
     dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
     dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/demo_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC");
     dataSource.setUsername("root");
-    dataSource.setPassword("xxxx");
+    dataSource.setPassword("xxx");
 
     dataSource.setReadOnly(false);
     dataSource.setConnectionTimeout(30000);
@@ -61,7 +61,7 @@ public class MybatisConfig {
   @Bean
   public MapperScannerConfigurer mapperScannerConfigurer() {
     MapperScannerConfigurer configurer = new MapperScannerConfigurer();
-    configurer.setBasePackage("self.work.dao.mapper");
+    configurer.setBasePackage("self.work.dao.mapper.**");
     configurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
     return configurer;
   }

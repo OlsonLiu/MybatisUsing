@@ -1,10 +1,10 @@
-package self.work.MybatisUsing;
+package self.work.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
-@SpringBootApplication(scanBasePackages={"com"})
+@SpringBootApplication(scanBasePackages={"self.work"})
 @PropertySource({"classpath:application.yml"})
 public class MybatisUsingApplication {
 
