@@ -1,5 +1,9 @@
 package self.work.configuration;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.notNullValue;
+
 import java.sql.SQLException;
 import javax.sql.DataSource;
 import org.junit.Test;
@@ -21,6 +25,6 @@ public class MybatisConfigTest {
 
   @Test
   public void getDataSource() throws SQLException {
-    System.out.println(dataSource.getConnection());
+    assertThat(dataSource.getConnection(), is(notNullValue()));
   }
 }
