@@ -10,11 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import self.work.app.MybatisUsingApplication;
 
-//import org.apache.ibatis.datasource.pooled.PooledDataSource;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes={MybatisUsingApplication.class})
 @ContextConfiguration
+@SuppressWarnings("Integration test: check DB connection")
 public class MybatisConfigTest {
 
   @Autowired

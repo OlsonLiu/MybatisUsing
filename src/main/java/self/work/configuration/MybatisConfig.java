@@ -9,35 +9,40 @@ import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-//import org.mybatis.spring.SqlSessionFactoryBean;
 
 
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)
 public class MybatisConfig {
 
-  @Value("${spring.datasource.driver-class-name}")
-  String driver;
-  @Value("${spring.datasource.url}")
-  String url;
-  @Value("${spring.datasource.username}")
-  String username;
-  @Value("${spring.datasource.password}")
-  String password;
-
+//  @Value("${spring.datasource.driver-class-name}")
+//  public String driver;
+//
+//  @Value("${spring.datasource.url}")
+//  public String url;
+//
+//  @Value("${spring.datasource.username}")
+//  public String username;
+//
+//  @Value("${spring.datasource.password}")
+//  public String password;
 
   @Bean
-  public HikariDataSource getDataSource(){
+  public HikariDataSource getDataSource(
+      @Value("${spring.datasource.driver-class-name}") String driver,
+      @Value("${spring.datasource.url}") String url,
+      @Value("${spring.datasource.username}") String username,
+      @Value("${spring.datasource.password}") String password) {
     HikariDataSource dataSource = new HikariDataSource();
-    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-    dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/demo_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC");
-    dataSource.setUsername("root");
-    dataSource.setPassword("xxx");
+    dataSource.setDriverClassName(driver);
+    dataSource.setJdbcUrl(url);
+    dataSource.setUsername(username);
+    dataSource.setPassword(password);
 
     dataSource.setReadOnly(false);
     dataSource.setConnectionTimeout(30000);
@@ -48,13 +53,10 @@ public class MybatisConfig {
     return dataSource;
   }
 
-
-  //配置事务管理器
   @Bean
-  public DataSourceTransactionManager transactionManager() throws IOException{
-    //这里的数据源要和配置SqlSessionFactoryBean中配置的数据源相同，事务才会生效
+  public DataSourceTransactionManager transactionManager(HikariDataSource dataSource) {
     DataSourceTransactionManager transactionManager =
-        new DataSourceTransactionManager(getDataSource());
+        new DataSourceTransactionManager(dataSource);
     return transactionManager;
   }
 
@@ -66,6 +68,10 @@ public class MybatisConfig {
     return configurer;
   }
 
+  @Bean
+  public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+    return new PropertySourcesPlaceholderConfigurer();
+  }
 
   @Bean
   public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws IOException {
