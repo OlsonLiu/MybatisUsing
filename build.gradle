@@ -1,3 +1,17 @@
+buildscript {
+	repositories {
+		jcenter()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	dependencies {
+		// Provides tasks to create executable JAR and run project from source.
+		// It also adds ResolutionStrategy, which allows to ommit versions in
+		// "blessed" dependencies below.
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.2.RELEASE")
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.2.0.BUILD-SNAPSHOT'
 	id 'java'
@@ -8,6 +22,10 @@ apply plugin: 'io.spring.dependency-management'
 group = 'self.work'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+processResources {
+	expand(project.properties)
+}
 
 repositories {
 	mavenCentral()
@@ -31,11 +49,14 @@ dependencies {
 	compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
 	compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.3.0'
 
+//	compileOnly "org.springframework.boot:spring-boot-configuration-processor"
+
 	implementation 'com.google.guava:guava:27.1-jre'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0'
-	implementation 'org.springframework.boot:spring-boot-starter-parent:1.3.3.RELEASE'
-//	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0'
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-parent:1.5.4.RELEASE'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testCompile 'junit:junit'
+	testImplementation 'junit:junit:4.12'
+	testImplementation 'org.hamcrest:hamcrest-library:1.3'
 }
