@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mariadb://127.0.0.1:3306/demo_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
     username: root
-    password: zaq12wsx
+    password: xxxxxxxx
     driver-class-name: org.mariadb.jdbc.Driver
 
 server:
