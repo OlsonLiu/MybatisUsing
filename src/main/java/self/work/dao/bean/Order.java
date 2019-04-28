@@ -11,7 +11,7 @@ public class Order implements Serializable {
   private Date shippedDate;
   private String status;
   private String comments;
-  private Integer customerNumber;
+  private Customer customer;
 
   public int getOrderNumber() {
     return orderNumber;
@@ -61,11 +61,11 @@ public class Order implements Serializable {
     this.comments = comments;
   }
 
-  public Integer getCustomerNumber() {
-    return customerNumber;
+  public Customer getCustomer() {
+    return customer;
   }
 
-  public void setCustomerNumber(Integer customerNumber) {
-    this.customerNumber = customerNumber;
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
   }
 }
