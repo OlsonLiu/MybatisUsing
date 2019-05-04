@@ -60,6 +60,7 @@ public class MybatisConfig {
     return transactionManager;
   }
 
+
   @Bean
   public MapperScannerConfigurer mapperScannerConfigurer() {
     MapperScannerConfigurer configurer = new MapperScannerConfigurer();

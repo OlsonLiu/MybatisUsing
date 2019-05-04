@@ -3,7 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="self.work.dao.mapper.EmployeeMapper">
-  <select id="selectEmployees" resultType="self.work.dao.bean.Employee">
+  <select id="selectEmployees" resultType="self.work.dao.bean.Employee"
+    parameterType="java.util.Set">
     SELECT employeenumber,
        lastname,
        firstname,
@@ -13,5 +14,14 @@
        reportsto,
        jobtitle
     FROM employees
+    <where>
+      <if test="null != collection and collection.size() > 0">
+        employeeNumber IN
+        <foreach item="employeeNumber" index="index" collection="collection" open="(" separator=","
+          close=")">
+          #{employeeNumber}
+        </foreach>
+      </if>
+    </where>
   </select>
 </mapper>
