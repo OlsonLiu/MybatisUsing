@@ -38,9 +38,10 @@ public class SearchController {
     return employees;
   }
 
-  @RequestMapping(method = RequestMethod.GET, value = "/emp", params = {"employeeNumbers"})
+  //  search/emp?eid=1102&eid=1056
+  @RequestMapping(method = RequestMethod.GET, value = "/emp", params = {"eid"})
   public List<Employee> searchMultiEmployee(
-      @RequestParam("employeeNumbers") List<Integer> employeeNumbers) {
+      @RequestParam("eid") List<Integer> employeeNumbers) {
     Set<Integer> searchNumbs = employeeNumbers.stream().collect(Collectors.toSet());
     List<Employee> employees = employeeService.searchEmployeeByNumber(searchNumbs);
     return employees;
