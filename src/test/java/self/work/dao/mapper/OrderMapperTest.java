@@ -1,8 +1,6 @@
 package self.work.dao.mapper;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
+import static com.google.common.truth.Truth.assertThat;
 
 import com.google.common.collect.ImmutableSet;
 import java.util.HashSet;
@@ -28,14 +26,14 @@ public class OrderMapperTest {
   @Test
   public void selectOrder_test_all_data() {
     List<Order> orderList = orderMapper.selectOrdersById(new HashSet<>());
-    assertThat(orderList.size(), is(greaterThan(10)));
+    assertThat(orderList.size()).isGreaterThan(10);
   }
 
   @Test
   public void selectOrder_test_specific_id() {
     List<Order> orderList = orderMapper.selectOrdersById(ImmutableSet.of(10100));
-    assertThat(orderList.size(), is((1)));
-    assertThat(orderList.get(0).getCustomer().getCustomerName(),
-        is("Online Diecast Creations Co."));
+    assertThat(orderList.size()).isEqualTo(1);
+    assertThat(orderList.get(0).getCustomer().getCustomerName())
+        .isEqualTo("Online Diecast Creations Co.");
   }
 }

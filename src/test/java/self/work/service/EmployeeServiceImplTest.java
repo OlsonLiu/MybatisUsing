@@ -1,7 +1,6 @@
 package self.work.service;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static com.google.common.truth.Truth.assertThat;
 
 import java.util.List;
 import org.assertj.core.util.Lists;
@@ -36,6 +35,6 @@ public class EmployeeServiceImplTest {
     List<Employee> mockResult = Lists.newArrayList(emp);
     Mockito.when(employeeMapper.selectEmployees(null)).thenReturn(mockResult);
     List<Employee> testRes = employeeService.searchEmployeeByNumber(null);
-    assertThat(testRes.size(), is(1));
+    assertThat(testRes.size()).isEqualTo(1);
   }
 }

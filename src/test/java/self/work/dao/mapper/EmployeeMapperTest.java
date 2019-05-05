@@ -26,6 +26,6 @@ public class EmployeeMapperTest {
   public void selectTest() {
     List<Employee> result = employeeMapper.selectEmployees(new HashSet<>());
     assertThat(result).isNotEmpty();
-    assertThat(result.size()).isGreaterThan(1);
+    assertThat(result.size()).isAtLeast(1);
   }
 }
