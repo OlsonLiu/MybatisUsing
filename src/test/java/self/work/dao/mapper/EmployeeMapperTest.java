@@ -1,9 +1,6 @@
 package self.work.dao.mapper;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.IsNull.notNullValue;
+import static com.google.common.truth.Truth.assertThat;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,7 +25,7 @@ public class EmployeeMapperTest {
   @Test
   public void selectTest() {
     List<Employee> result = employeeMapper.selectEmployees(new HashSet<>());
-    assertThat(result, is(notNullValue()));
-    assertThat(result.size(), is(greaterThan(1)));
+    assertThat(result).isNotEmpty();
+    assertThat(result.size()).isGreaterThan(1);
   }
 }
